@@ -1,0 +1,13 @@
+# ExpectUnaffectedRegisters
+# TAXCanTransferANonNegativeNonZeroValue
+# TAXCanTransferANonNegativeZeroValue
+# TAXCanTransferANegativeValue
+# TAYCanTransferANonNegativeNonZeroValue
+# TAYCanTransferANonNegativeZeroValue
+# TAYCanTransferANegativeValue
+# TXACanTransferANonNegativeNonZeroValue
+# TXACanTransferANonNegativeZeroValue
+# TXACanTransferANegativeValue
+# TYACanTransferANonNegativeNonZeroValue
+# TYACanTransferANonNegativeZeroValue
+# TYACanTransferANegativeValue

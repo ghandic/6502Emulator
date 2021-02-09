@@ -38,6 +38,13 @@ class CPU(object):
         """Makes string representation of CPU:  the registers, program counter etc"""
         return f"A: {self.A} X: {self.X} Y: {self.Y}\nPC: {self.program_counter} SP: {self.stack_pointer}\nPS: {self.processor_status}\n"
 
+    def reset(self) -> None:
+        self.__init__()
+
+    def reset_to(self, reset_vector: Word) -> None:
+        self.reset()
+        self.program_counter = reset_vector
+
     @property
     def sp_to_address(self) -> Word:
         return Word(0x100 | self.stack_pointer)
@@ -54,7 +61,7 @@ class CPU(object):
         data = self.Memory[self.program_counter]
         self.program_counter += 1
         self.cycles -= 1
-        return data
+        return Byte(data)
 
     def fetch_sbyte(self) -> SByte:
         return SByte(self.fetch_byte())
@@ -67,17 +74,17 @@ class CPU(object):
         data |= self.Memory[self.program_counter] << 8
         self.program_counter += 1
         self.cycles -= 2
-        return data
+        return Word(data)
 
     def read_byte(self, address: Word) -> Byte:
         data = self.Memory[address]
         self.cycles -= 1
-        return data
+        return Byte(data)
 
     def read_word(self, address: Word) -> Byte:
         low_byte = self.read_byte(address)
         high_byte = self.read_byte(address + 1)
-        return low_byte | (high_byte << 8)
+        return Word(low_byte | (high_byte << 8))
 
     def write_byte(self, address: Word, value: Byte) -> None:
         self.Memory[address] = value
@@ -120,7 +127,7 @@ class CPU(object):
         value = self.read_word(self.sp_to_address + 1)
         self.stack_pointer += 2
         self.cycles -= 1
-        return value
+        return Word(value)
 
     def set_zero_and_negative_flags(self, register: str) -> None:
         _register = self.__get_register(register)
@@ -1053,7 +1060,7 @@ class CPU(object):
                     break
                 if case(OpCodes.INS_RTI):
                     self.__pop_processor_status_from_stack()
-                    self.processor_status = self.pop_word_from_stack()
+                    self.processor_status = Byte(self.pop_word_from_stack())
                     break
                 # default
                 raise NotImplementedError(f"Instruction {instruction} not handled")

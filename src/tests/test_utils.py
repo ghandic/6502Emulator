@@ -10,6 +10,12 @@ def test_cpu_repr(cpu):
     AssertThat(cpu.__repr__()).IsEqualTo("A: 1 X: 3 Y: 5\nPC: 65532 SP: 255\nPS: 255\n")
 
 
+def test_instruction_not_implemented(cpu):
+    with AssertThat(NotImplementedError).IsRaised():
+        cpu.Memory[0xFFFC] = -1
+        cpu.execute(1)
+
+
 def test_cpu_stack_pointer_to_address(cpu):
     AssertThat(cpu.sp_to_address).IsEqualTo(511)
 

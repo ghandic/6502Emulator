@@ -1,0 +1,5 @@
+# CanJumpToASubroutineAndJumpBackAgain
+# JSRDoesNotAffectTheProcessorStatus
+# RTSDoesNotAffectTheProcessorStatus
+# JumpAbsoluteCanJumpToAnNewLocationInTheProgram
+# JumpIndirectCanJumpToAnNewLocationInTheProgram

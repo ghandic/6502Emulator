@@ -1,0 +1,20 @@
+# VerfifyUnmodifiedFlagsFromStoreRegister
+# TestStoreRegisterZeroPage
+# TestStoreRegisterAbsolute
+# TestStoreRegisterZeroPageX
+# TestStoreRegisterZeroPageY
+
+# STAZeroPageCanStoreTheARegisterIntoMemory
+# STXZeroPageCanStoreTheXRegisterIntoMemory
+# STXZeroPageYCanStoreTheXRegisterIntoMemory
+# STYZeroPageCanStoreTheYRegisterIntoMemory
+# STAAbsoluteCanStoreTheARegisterIntoMemory
+# STXAbsoluteCanStoreTheXRegisterIntoMemory
+# STYAbsoluteCanStoreTheYRegisterIntoMemory
+# STAZeroPageXCanStoreTheARegisterIntoMemory
+# STYZeroPageXCanStoreTheYRegisterIntoMemory
+
+# STAAbsoluteXCanStoreTheARegisterIntoMemory
+# STAAbsoluteYCanStoreTheARegisterIntoMemory
+# STAIndirectXCanStoreTheARegisterIntoMemory
+# STAIndirectYCanStoreTheARegisterIntoMemory
