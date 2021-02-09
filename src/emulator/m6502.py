@@ -1,11 +1,8 @@
-from operator import eq
+from typing import List
 
 from .c_types import Byte, SByte, Word, s32, u32
 from .const import OpCodes, ProcessorStatus, StatusFlags
-
-
-def switch(value, comp=eq):
-    return [lambda match: comp(match, value)]
+from .utils import switch
 
 
 class Memory(object):
@@ -43,7 +40,7 @@ class CPU(object):
 
     @property
     def sp_to_address(self) -> Word:
-        return 0x100 | self.stack_pointer
+        return Word(0x100 | self.stack_pointer)
 
     def __get_register(self, register: str) -> Byte:
         assert register in ["A", "X", "Y"]
@@ -52,13 +49,6 @@ class CPU(object):
     def __set_register(self, register: str, value: Word) -> Byte:
         assert register in ["A", "X", "Y"]
         return setattr(self, register, value)
-
-    def reset(self) -> None:
-        self.__init__()
-
-    def reset_to(self, reset_vector: Word) -> None:
-        self.reset()
-        self.program_counter = reset_vector
 
     def fetch_byte(self) -> Byte:
         data = self.Memory[self.program_counter]
@@ -229,7 +219,7 @@ class CPU(object):
         self.cycles -= 1
         return effective_address_y
 
-    def load_program(self, program: bytes, num_bytes: u32) -> Word:
+    def load_program(self, program: List[Byte], num_bytes: u32) -> Word:
         """Returns the address that the program was loading into, or 0 if no program"""
         load_address: Word = 0
         if program and num_bytes:
